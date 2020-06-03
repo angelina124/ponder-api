@@ -1,0 +1,17 @@
+{
+  "name": "verve",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bcrypt": "4.0.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.13.3",
+    "mongoose": "^5.8.3",
+    "react-markdown": "^4.3.1"
+  },
+  "scripts": {
+    "dev": "nodemon server.js"
+  }
+}
