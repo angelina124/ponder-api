@@ -7,6 +7,9 @@ const mongoose = require('mongoose')
 // bcrypt for password hashing
 const bcrypt = require('bcrypt')
 
+// imprt user schema
+const User = require('../models/user')
+
 router.route('/')
   // create a user
   .post((req, res) => {

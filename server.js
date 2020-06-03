@@ -5,7 +5,7 @@ require('dotenv').config()
 
 // set up cors to allow cross-origin requests
 const cors = require('cors')
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/verve-api');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://angelina124:J4nC6a8qBKJbX1CY@cluster0-9mh5x.mongodb.net/test?retryWrites=true&w=majority');
 
 // Initialize http server
 const app = express()
