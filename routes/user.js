@@ -4,6 +4,9 @@ const router = express.Router()
 // mongoose for actually saving stuff to the MongoDB database
 const mongoose = require('mongoose')
 
+// bcrypt for password hashing
+const bcrypt = require('bcrypt')
+
 router.route('/')
   // create a user
   .post((req, res) => {
