@@ -57,7 +57,7 @@ router.route('/:id')
     })
   })
 
-router.route('/:id')
+router.route('/:id/passwords')
   .post((req, res) => {
     const { id } = req.params
     const { password } = req.body
