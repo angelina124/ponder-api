@@ -36,7 +36,7 @@ router.route('/')
           err: "Oops! My bad! Looks like something went wrong with the db :("
         })
       } else {
-        res.status(200).json({ user: userDoc })
+        res.status(201).json({ user: userDoc })
       }
     })
   })
@@ -53,6 +53,32 @@ router.route('/:id')
           _id: user._id,
           username: user.username
         })
+      }
+    })
+  })
+
+router.route('/:id')
+  .post((req, res) => {
+    const { id } = req.params
+    const { password } = req.body
+    if (!password || !id) {
+      res.status(400).json({
+        error: true,
+        err: "Invalid fields you dummy! Please give me an id and a password!"
+      })
+    }
+
+    const hashed_pw = bcrypt.hashSync(password, 10)
+
+    User.findByIdAndUpdate({ password: hashed_pw }, (err, userDoc) => {
+      if (err) {
+        res.status(500).json({
+          error: true,
+          error_msg: err,
+          err: "Oops! My bad! Looks like something went wrong with the db :("
+        })
+      } else {
+        res.status(200).json({ user: userDoc })
       }
     })
   })
