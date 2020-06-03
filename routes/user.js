@@ -70,7 +70,7 @@ router.route('/:id/passwords')
 
     const hashed_pw = bcrypt.hashSync(password, 10)
 
-    User.findByIdAndUpdate({ password: hashed_pw }, (err, userDoc) => {
+    User.findByIdAndUpdate(id, { password: hashed_pw }, (err, userDoc) => {
       if (err) {
         res.status(500).json({
           error: true,
