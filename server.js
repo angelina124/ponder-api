@@ -15,7 +15,7 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-app.use('/api/users/', require('./routing/user'))
+app.use('/api/users/', require('./routes/user'))
 
 const port = process.env.PORT || 3000;
 // creates express server
