@@ -33,6 +33,7 @@ router.route('/')
       if (err) {
         res.status(500).json({
           error: true,
+          error_msg: err,
           err: "Oops! My bad! Looks like something went wrong with the db :("
         })
       } else {
