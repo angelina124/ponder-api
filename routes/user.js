@@ -40,5 +40,21 @@ router.route('/')
       }
     })
   })
+router.route('/:id')
+  .get((req, res) => {
+    const { id } = req.params
+    if (!id) res.status(400).json({ error: true, err: "Ya better gimme an id" })
+
+    User.findById(id).exec((err, user) => {
+      if (err) {
+        res.status(500).json({ error: true })
+      } else {
+        res.json({
+          _id: user._id,
+          username: user.username
+        })
+      }
+    })
+  })
 
 module.exports = router
