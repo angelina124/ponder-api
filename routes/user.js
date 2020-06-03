@@ -22,7 +22,7 @@ router.route('/')
     }
 
     // const hashed_pw = bcrypt.hashSync(password, 10)
-    const hashed_pw - password
+    const hashed_pw = password
 
     var user = new User({
       username,
