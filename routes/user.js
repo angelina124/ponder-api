@@ -34,4 +34,4 @@ router.route('/')
     })
   })
 
-export default router
+module.exports = router
