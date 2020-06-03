@@ -5,7 +5,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 
 // bcrypt for password hashing
-const bcrypt = require('bcrypt')
+// const bcrypt = require('bcrypt')
 
 // imprt user schema
 const User = require('../models/user')
@@ -21,7 +21,8 @@ router.route('/')
       })
     }
 
-    const hashed_pw = bcrypt.hashSync(password, 10)
+    // const hashed_pw = bcrypt.hashSync(password, 10)
+    const hashed_pw = password
 
     var user = new User({
       username,
