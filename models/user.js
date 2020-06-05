@@ -3,9 +3,14 @@ const { Schema, model } = mongoose
 
 // Define user schema
 var UserSchema = new Schema({
+  email: {
+    type: String,
+    unique: true
+  },
   username: {
     type: String,
     unique: true,
+    required: true
   },
   password: {
     type: String,
@@ -21,15 +26,16 @@ var UserSchema = new Schema({
     ref: 'Article',
     required: false
   }],
-  friends: [{
+  collections: [{
     type: Schema.ObjectId,
-    ref: 'User',
+    ref: 'Collection',
     required: false
   }],
   loginStreak: {
     type: Number,
     required: false
-  }
+  },
+  //mentalHealthScore?
 });
 
 // Export Mongoose model
