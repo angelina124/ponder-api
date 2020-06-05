@@ -63,6 +63,7 @@ router.route('/:id')
     User.findByIdAndDelete((err, user) => {
       // TODO: delete child documents of user once we decie what they should be
       if (err) {
+        console.log(err)
         res.status(500).json({ error: true })
       } else {
         res.status(200).json({
