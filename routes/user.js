@@ -60,7 +60,7 @@ router.route('/:id')
     const { id } = req.params
     if (!id) res.status(400).json({ error: true, err: "Ya better gimme an id" })
 
-    User.findByIdAndDelete((err, user) => {
+    User.findByIdAndDelete(id, (err, user) => {
       // TODO: delete child documents of user once we decie what they should be
       if (err) {
         res.status(500).json({ error: true, err })
