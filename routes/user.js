@@ -65,7 +65,10 @@ router.route('/:id')
       if (err) {
         res.status(500).json({ error: true })
       } else {
-        res.json({})
+        res.status(200).json({
+          _id: user._id,
+          username: user.username
+        })
       }
     })
   })
