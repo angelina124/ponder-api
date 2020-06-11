@@ -4,16 +4,13 @@ const router = express.Router()
 // mongoose for actually saving stuff to the MongoDB database
 const mongoose = require('mongoose')
 
-// bcrypt for password hashing
-const bcrypt = require('bcrypt')
-
 // import article schema
 const Article = require('../models/article')
+
 
 router.route('/')
   .post((req, res) => {
     let { title, url, tags } = req.body
-    console.log(req.body)
 
     if (!title || !url || !tags) {
       return res.status(400).json({
@@ -34,7 +31,19 @@ router.route('/')
         return res.status(200).json({ article: article })
       }
     })
+  })
+  .get((req, res) => {
+    let { user } = req.body
 
+    //do some wit.ai processing
+
+    if (!user || !limit) {
+      return res.status(400).json({
+        error: "User or limit may be missing in your request."
+      })
+    } else {
+      //Article.find
+    }
   })
 
 module.exports = router
