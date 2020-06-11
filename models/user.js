@@ -5,7 +5,8 @@ const { Schema, model } = mongoose
 var UserSchema = new Schema({
   email: {
     type: String,
-    unique: true
+    unique: true,
+    required: false
   },
   username: {
     type: String,
@@ -16,19 +17,9 @@ var UserSchema = new Schema({
     type: String,
     required: true
   },
-  stats: [{
-    type: Schema.ObjectId,
-    ref: 'DailyStat',
-    required: false
-  }],
   articles: [{
     type: Schema.ObjectId,
     ref: 'Article',
-    required: false
-  }],
-  collections: [{
-    type: Schema.ObjectId,
-    ref: 'Collection',
     required: false
   }],
   loginStreak: {
