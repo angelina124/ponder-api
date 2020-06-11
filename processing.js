@@ -7,6 +7,8 @@ const client = new Wit({
   logger: new log.Logger(log.DEBUG) // optional
 });
 
-export const analyzeIntent = (text) => {
+const analyzeIntent = (text) => {
   return client.message(text)
 }
+
+module.exports = { analyzeIntent }

@@ -8,7 +8,7 @@ const mongoose = require('mongoose')
 const JournalEntry = require('../models/journalEntry')
 
 //import processing functions
-const analyzeIntent = require('../models/processing')
+const analyzeIntent = require('../processing')
 
 router.route('/')
   .post((req, res) => {
