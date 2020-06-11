@@ -3,11 +3,6 @@ const { Schema, model } = mongoose
 
 // Define user schema
 var UserSchema = new Schema({
-  email: {
-    type: String,
-    unique: true,
-    required: false
-  },
   username: {
     type: String,
     unique: true,
@@ -20,6 +15,11 @@ var UserSchema = new Schema({
   articles: [{
     type: Schema.ObjectId,
     ref: 'Article',
+    required: false
+  }],
+  journals: [{
+    type: Schema.ObjectId,
+    ref: 'JournalEntry',
     required: false
   }],
   loginStreak: {
