@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 // bcrypt for password hashing
 const bcrypt = require('bcrypt')
 
-// imprt user schema
+// import user schema
 const User = require('../models/user')
 
 router.route('/')
@@ -47,6 +47,7 @@ router.route('/:id')
 
     User.findById(id).exec((err, user) => {
       console.log(user)
+      console.log(err)
       if (err || !user) {
         res.status(500).json({ error: true })
       } else {

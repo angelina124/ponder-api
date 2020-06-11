@@ -7,8 +7,8 @@ const mongoose = require('mongoose')
 // bcrypt for password hashing
 const bcrypt = require('bcrypt')
 
-// imprt user schema
-const User = require('../models/user')
+// import article schema
+const Article = require('../models/article')
 
 router.route('/')
   .post((req, res) => {
