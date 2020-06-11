@@ -46,6 +46,7 @@ router.route('/:id')
     if (!id) res.status(400).json({ error: true, err: "Ya better gimme an id" })
 
     User.findById(id).exec((err, user) => {
+      console.log(user)
       if (err) {
         res.status(500).json({ error: true })
       } else {
