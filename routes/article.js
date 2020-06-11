@@ -13,6 +13,7 @@ const Article = require('../models/article')
 router.route('/')
   .post((req, res) => {
     let { title, url, tags } = req.body
+    console.log(req.body)
 
     if (!title || !url || !tags) {
       return res.status(400).json({
