@@ -12,11 +12,11 @@ const analyzeIntent = require('../models/processing')
 
 router.route('/')
   .post((req, res) => {
-    let { text } = req.body
+    let { text, user } = req.body
 
-    if (!text) {
+    if (!text || !user) {
       return res.status(400).json({
-        error: "Text may be missing in your request."
+        error: "Text or user may be missing in your request."
       })
     }
 

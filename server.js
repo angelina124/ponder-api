@@ -17,6 +17,7 @@ app.use(bodyParser.json())
 
 app.use('/api/users/', require('./routes/user'))
 app.use('/api/articles/', require('./routes/article'))
+app.use('/api/journals/', require('./routes/journal'))
 
 const port = process.env.PORT || 3000;
 // creates express server
