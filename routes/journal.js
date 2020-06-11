@@ -21,24 +21,30 @@ router.route('/')
       })
     }
 
-    const intents = analyzeIntent(text)
-    const positivityScore = 1
+    analyzeIntent(text).then(([error, intents]) => {
+      if (error) {
+        return res.status(500).json({ error })
+      }
+      else {
+        const positivityScore = 1
 
-    const journal = new JournalEntry({
-      title,
-      positivityScore,
-      intents
-    })
+        const journal = new JournalEntry({
+          text,
+          positivityScore,
+          intents
+        })
 
-    journal.save((err, journal) => {
-      if (err) {
-        return res.status(501).json({ error: err })
-      } else {
-        User.findByIdAndUpdate(user, { $push: { journals: journal } }, (error, user) => {
-          if (error) {
-            return res.status(501).json({ error })
+        journal.save((err, journal) => {
+          if (err) {
+            return res.status(501).json({ error: err })
           } else {
-            return res.status(200).json({ journal })
+            User.findByIdAndUpdate(user, { $push: { journals: journal } }, (error, user) => {
+              if (error) {
+                return res.status(501).json({ error })
+              } else {
+                return res.status(200).json({ journal })
+              }
+            })
           }
         })
       }

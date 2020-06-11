@@ -7,8 +7,18 @@ const client = new Wit({
   logger: new log.Logger(log.DEBUG) // optional
 });
 
+// returns a tuple (error, intents)
 const analyzeIntent = (text) => {
-  return client.message(text)
+  return new Promise(resolve => {
+    client.message(text)
+      .then((data) => {
+        const { intents } = data
+        const intentNames = intents.map((intent) => intent.name)
+        resolve([null, intentNames])
+      }).catch((err) =>
+        resolve([err, null])
+      )
+  })
 }
 
 module.exports = { analyzeIntent }
