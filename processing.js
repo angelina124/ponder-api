@@ -13,11 +13,15 @@ const analyzeIntent = (text) => {
     client.message(text)
       .then((data) => {
         const { intents } = data
-        const intentNames = intents.map((intent) => intent.name)
-        resolve([null, intentNames])
-      }).catch((err) =>
+        if (intents.length > 0) {
+          const { name, confidence } = intents[0]
+          resolve([null, { name, confidence }])
+        } else {
+          resolve([null, { name: "sleep", confidence: 0 }])
+        }
+      }).catch((err) => {
         resolve([err, null])
-      )
+      })
   })
 }
 

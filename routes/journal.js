@@ -21,17 +21,18 @@ router.route('/')
       })
     }
 
-    analyzeIntent(text).then(([error, intents]) => {
+    analyzeIntent(text).then(([error, intent]) => {
       if (error) {
         return res.status(500).json({ error })
       }
       else {
+        console.log(intent)
         const positivityScore = 1
 
         const journal = new JournalEntry({
           text,
           positivityScore,
-          intents
+          intent
         })
 
         journal.save((err, journal) => {

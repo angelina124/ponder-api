@@ -6,9 +6,14 @@ var JournalEntrySchema = new Schema({
     type: Number,
     required: true
   },
-  intents: [{
-    type: String
-  }],
+  intent: {
+    name: {
+      type: String
+    },
+    confidence: {
+      type: Number
+    }
+  },
   text: {
     type: String,
     required: true
