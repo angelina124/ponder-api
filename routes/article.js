@@ -33,9 +33,15 @@ router.route('/')
     })
   })
   .get((req, res) => {
-    let { user } = req.body
+    let { user, intents, entities } = req.body
 
-    //do some wit.ai processing
+    // do some wit.ai processing
+    // maybe fun articles?
+    // quotes?
+    // book passages?
+    // general self care??
+    // entities for fun stuff like cooking
+    // I'm so bored
 
     if (!user || !limit) {
       return res.status(400).json({

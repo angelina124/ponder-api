@@ -12,6 +12,7 @@ const analyzeIntent = (text) => {
   return new Promise(resolve => {
     client.message(text)
       .then((data) => {
+        console.log(data)
         const { intents } = data
         if (intents.length > 0) {
           const { name, confidence } = intents[0]
