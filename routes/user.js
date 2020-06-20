@@ -22,6 +22,7 @@ router.route('/')
     }
 
     const hashed_pw = bcrypt.hashSync(password, 10)
+    console.log(hashed_pw)
 
     var user = new User({
       username,
@@ -40,14 +41,34 @@ router.route('/')
       }
     })
   })
+
+router.route('/login')
+  .get((req, res) => {
+    const { username, password } = req.body
+
+    if (!username || !password) {
+      return res.status(400).json({ error: "Invalid fields" })
+    }
+
+    User.findOne({ username }).exec((err, user) => {
+      if (err) {
+        return res.status(500).json({ error: "Something went wrong with the database! Sorry!" })
+      }
+      bcrypt.compare(password, user.password, (err, result) => {
+        if (result) {
+          return res.status(200).json({ success: true, user })
+        } else {
+          return res.status(400).json({ error: "Invalid username or password." })
+        }
+      })
+    })
+  })
 router.route('/:id')
   .get((req, res) => {
     const { id } = req.params
     if (!id) res.status(400).json({ error: true, err: "Ya better gimme an id" })
 
     User.findById(id).exec((err, user) => {
-      console.log(user)
-      console.log(err)
       if (err || !user) {
         res.status(500).json({ error: true })
       } else {
