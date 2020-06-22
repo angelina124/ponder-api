@@ -26,7 +26,6 @@ router.route('/')
         return res.status(500).json({ error })
       }
       else {
-        console.log(intent)
         const positivityScore = 1
 
         const journal = new JournalEntry({

@@ -22,7 +22,6 @@ router.route('/')
     }
 
     const hashed_pw = bcrypt.hashSync(password, 10)
-    console.log(hashed_pw)
 
     var user = new User({
       username,
@@ -43,14 +42,14 @@ router.route('/')
   })
 
 router.route('/login')
-  .get((req, res) => {
+  .post((req, res) => {
     const { username, password } = req.body
 
     if (!username || !password) {
       return res.status(400).json({ error: "Invalid fields" })
     }
 
-    User.findOne({ username }).exec((err, user) => {
+    User.findOne({ username }).populate('articles').exec((err, user) => {
       if (err) {
         return res.status(500).json({ error: "Something went wrong with the database! Sorry!" })
       }
