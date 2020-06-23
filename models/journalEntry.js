@@ -7,14 +7,14 @@ var JournalEntrySchema = new Schema(
       type: Number,
       required: true
     },
-    intent: {
+    intents: [{
       name: {
         type: String
       },
       confidence: {
         type: Number
       }
-    },
+    }],
     text: {
       type: String,
       required: true
