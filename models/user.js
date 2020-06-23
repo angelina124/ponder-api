@@ -22,6 +22,11 @@ var UserSchema = new Schema({
     ref: 'JournalEntry',
     required: false
   }],
+  favoriteJournals: [{
+    type: Schema.ObjectId,
+    ref: 'JournalEntry',
+    required: false
+  }],
   loginStreak: {
     type: Number,
     required: false

@@ -18,6 +18,9 @@ var JournalEntrySchema = new Schema(
     text: {
       type: String,
       required: true
+    },
+    article: {
+      type: Schema.ObjectId
     }
   },
   { timestamps: true }

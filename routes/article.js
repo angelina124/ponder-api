@@ -7,6 +7,9 @@ const mongoose = require('mongoose')
 // import article schema
 const Article = require('../models/article')
 
+// import user schema
+const User = require('../models/user')
+
 router.route('/')
   .post((req, res) => {
     let { title, url, tags } = req.body
@@ -33,15 +36,6 @@ router.route('/')
   })
   .get((req, res) => {
     let { user, intentName } = req.query
-    console.log(req.query)
-
-    // do some wit.ai processing
-    // maybe fun articles?
-    // quotes?
-    // book passages?
-    // general self care??
-    // entities for fun stuff like cooking
-    // I'm so bored
 
     if (!user) {
       return res.status(400).json({
@@ -62,11 +56,27 @@ router.route('/')
                 if (err) {
                   return res.status(500).json({ err })
                 } else {
-                  return res.status(200).json({ article: randomArticle })
+                  User.findByIdAndUpdate(user._id,
+                    { article: randomArticle._id },
+                    { new: true },
+                    (userError, updatedUser) => {
+                      if (userError) {
+                        return res.status(500).json({ error: userError })
+                      }
+                      return res.status(200).json({ user: updatedUser, article: randomArticle })
+                    })
                 }
               })
           } else {
-            return res.status(200).json({ article })
+            User.findByIdAndUpdate(user._id,
+              { article: article._id },
+              { new: true },
+              (userError, updatedUser) => {
+                if (userError) {
+                  return res.status(500).json({ error: userError })
+                }
+                return res.status(200).json({ user: updatedUser, article: article })
+              })
           }
         })
     }

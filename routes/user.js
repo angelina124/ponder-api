@@ -49,8 +49,16 @@ router.route('/login')
       return res.status(400).json({ error: "Invalid fields" })
     }
 
-    User.findOne({ username }).populate('articles').populate('journals').exec((err, user) => {
+    User.findOne({ username }).populate('articles').populate({
+      path: 'journals',
+      model: 'JournalEntry',
+      populate: {
+        path: 'article',
+        model: 'Article'
+      }
+    }).exec((err, user) => {
       if (err) {
+        console.log(err)
         return res.status(500).json({ error: "Something went wrong with the database! Sorry!" })
       }
       bcrypt.compare(password, user.password, (err, result) => {
