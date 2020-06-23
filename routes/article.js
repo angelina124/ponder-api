@@ -7,7 +7,6 @@ const mongoose = require('mongoose')
 // import article schema
 const Article = require('../models/article')
 
-
 router.route('/')
   .post((req, res) => {
     let { title, url, tags } = req.body
@@ -33,7 +32,8 @@ router.route('/')
     })
   })
   .get((req, res) => {
-    let { user, intents, entities } = req.body
+    let { user, intentName } = req.query
+    console.log(req.query)
 
     // do some wit.ai processing
     // maybe fun articles?
@@ -43,12 +43,32 @@ router.route('/')
     // entities for fun stuff like cooking
     // I'm so bored
 
-    if (!user || !limit) {
+    if (!user) {
       return res.status(400).json({
-        error: "User or limit may be missing in your request."
+        error: "User may be missing in your request."
       })
     } else {
-      //Article.find
+      Article.findOne({ tags: { "$in": intentName } })
+        .exec()
+        .then((error, article) => {
+          console.log(article)
+          if (error || !article) {
+            // Get a random entry
+            var random = Math.floor(Math.random() * 3)
+
+            // Again query all articles but only fetch one offset by our random #
+            Article.findOne().skip(random).exec(
+              function (err, randomArticle) {
+                if (err) {
+                  return res.status(500).json({ err })
+                } else {
+                  return res.status(200).json({ article: randomArticle })
+                }
+              })
+          } else {
+            return res.status(200).json({ article })
+          }
+        })
     }
   })
 
