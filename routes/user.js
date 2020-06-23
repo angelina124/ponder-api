@@ -28,7 +28,7 @@ router.route('/')
       password: hashed_pw
     })
 
-    user.save((err, userDoc) => {
+    user.save((err, user) => {
       if (err) {
         res.status(500).json({
           error: true,
@@ -36,7 +36,7 @@ router.route('/')
           err: "Oops! My bad! Looks like something went wrong with the db :("
         })
       } else {
-        res.status(201).json({ user: userDoc })
+        res.status(201).json({ user })
       }
     })
   })
