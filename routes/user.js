@@ -10,6 +10,9 @@ const bcrypt = require('bcrypt')
 // import user schema
 const User = require('../models/user')
 
+// import journal schema
+const JournalEntry = require('../models/user')
+
 router.route('/')
   // create a user
   .post((req, res) => {
@@ -128,5 +131,7 @@ router.route('/:id/passwords')
       }
     })
   })
+
+
 
 module.exports = router

@@ -21,6 +21,10 @@ var JournalEntrySchema = new Schema(
     },
     article: {
       type: Schema.ObjectId
+    },
+    favorited: {
+      type: Boolean,
+      default: false
     }
   },
   { timestamps: true }
