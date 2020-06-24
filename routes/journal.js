@@ -19,7 +19,6 @@ let getIntents = async (segments) => {
       if (error) {
         return res.status(500).json({ error })
       } else {
-        console.log(intent)
         intents.push(intent)
       }
     })
@@ -49,7 +48,6 @@ getIntent = (intents) => {
       strongestIntent = intent.name;
     }
   });
-  console.log(strongestIntent);
   return strongestIntent;
 }
 
@@ -93,12 +91,12 @@ router.route('/')
       const positivityScore = 1
       const intentName = getIntent(intents);
 
-      Article.findOne({ tags: { "$in": intentName } })
+      Article.findOne({ tags: { $in: intentName } })
         .exec()
         .then((error, article) => {
           if (error || !article) {
             // Get a random entry
-            var random = Math.floor(Math.random() * 3)
+            var random = Math.floor(Math.random() * 5)
 
             // Again query all articles but only fetch one offset by our random #
             Article.findOne().skip(random).exec(
